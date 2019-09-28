@@ -16,16 +16,22 @@ public class MoveController : MonoBehaviour
     void Update()
     {
         UpdateSpeed();
-    }
-
-    private void FixedUpdate()
-    {
-        
+        //UpdateRotation();
     }
 
     private void UpdateSpeed()
     {
         rigidbody2D.velocity = maxSpeed *
                     new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    }
+    private void UpdateRotation()
+    {
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        {
+            float angle = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * Mathf.Rad2Deg - 90;
+            angle = Mathf.Lerp(transform.rotation.z % 360, angle % 360, 0.5f);
+            
+            transform.rotation = Quaternion.AngleAxis(angle , Vector3.forward);
+        }
     }
 }
