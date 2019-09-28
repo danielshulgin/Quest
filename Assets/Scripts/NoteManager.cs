@@ -19,12 +19,12 @@ class NoteManager : MonoBehaviour
 
         if (notes.Count - 1 >= id && TagsCorrect(tagsToCheck))
         {
-            Debug.Log(notes[id]);
+            Debug.Log(id + " " + notes[id]);
             UIManager.instance.ShowNote(notes[id]);
+			DeleteTags(tagsToRemove);
+			SetTags(tagsToChange);
         }
 
-        DeleteTags(tagsToRemove);
-        SetTags(tagsToChange);
     }
     private void Start()
     {
