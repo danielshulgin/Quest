@@ -6,6 +6,8 @@ class Interactable : MonoBehaviour
 {
     public int id = 0;
 
+    public AudioClip clip;
+
     public List<string> tagsToRemove = new List<string>();
     public List<StringBoolPair> tagsToChange = new List<StringBoolPair>();
     public List<StringBoolPair> tagsToCheck = new List<StringBoolPair>();
@@ -15,7 +17,7 @@ class Interactable : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             //collision.GetComponent<Interaction>().Interact(id);
-            NoteManager.instance.Interact(tagsToRemove, tagsToChange,tagsToCheck, id);
+            NoteManager.instance.Interact(tagsToRemove, tagsToChange, tagsToCheck, id, clip);
         }
     }
 

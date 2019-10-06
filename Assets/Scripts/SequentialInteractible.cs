@@ -7,8 +7,10 @@ using UnityEngine;
 
 class SequentialInteractible : MonoBehaviour
 {
-    public List<BehaviourItem> behaviours = new List<BehaviourItem>();
+    public AudioClip clip = null;
 
+    public List<BehaviourItem> behaviours = new List<BehaviourItem>();
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -18,7 +20,7 @@ class SequentialInteractible : MonoBehaviour
             {
                 var behaviur = behaviours[i];
                 if (NoteManager.instance.Interact(behaviur.tagsToRemove,
-                    behaviur.tagsToChange, behaviur.tagsToCheck, behaviur.id))
+                    behaviur.tagsToChange, behaviur.tagsToCheck, behaviur.id, clip))
                 {
                     break;
                 }

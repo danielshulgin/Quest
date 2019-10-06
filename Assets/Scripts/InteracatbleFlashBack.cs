@@ -11,13 +11,15 @@ class InteracatbleFlashBack : Interactable
 {
     public GameObject teleportPoint;
     public float teleportDelay = 2f;
+    public float reEnableMovement = true;
     private bool wait = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             //collision.GetComponent<Interaction>().Interact(id);
-            if (NoteManager.instance.Interact(tagsToRemove, tagsToChange, tagsToCheck, id)
+            if (NoteManager.instance.Interact(tagsToRemove, tagsToChange, tagsToCheck, id, clip)
                 && !wait)
             {
                 StartCoroutine(TeleportWithDelay());
@@ -35,6 +37,7 @@ class InteracatbleFlashBack : Interactable
 
     IEnumerator TeleportWithDelay()
     {
+
         wait = true;
         yield return new WaitForSeconds(teleportDelay);
         FlashBackManager.instance.Teleport(teleportPoint.transform.position);

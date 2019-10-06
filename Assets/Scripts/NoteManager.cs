@@ -14,7 +14,7 @@ class NoteManager : MonoBehaviour
 
     public bool Interact(List<string> tagsToRemove,
                  List<StringBoolPair> tagsToChange,
-                 List<StringBoolPair> tagsToCheck, int id)
+                 List<StringBoolPair> tagsToCheck, int id, AudioClip clip = null)
     {
 
         if (notes.Count - 1 >= id && TagsCorrect(tagsToCheck))
@@ -23,6 +23,8 @@ class NoteManager : MonoBehaviour
             UIManager.instance.ShowNote(notes[id]);
 			DeleteTags(tagsToRemove);
 			SetTags(tagsToChange);
+            if (clip != null)
+                Camera.main.GetComponent<AudioSource>().PlayOneShot(clip);
             return true;
         }
         return false;
