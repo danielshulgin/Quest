@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     public Text notePopUptext;
     public CanvasGroup notePanelCanvasGroup;
+    public Image filler;
 
-    public static UIManager instance;
     private void Start()
     {
         instance = this;
@@ -23,5 +25,23 @@ public class UIManager : MonoBehaviour
     public void HideNote()
     {
         notePanelCanvasGroup.alpha = 0f;
+    }
+
+    public IEnumerator ShowFiller()
+    {
+        for (int i = 0; i < 255; i += 20)
+        {
+            filler.color = new Color(1, 1, 1, i/255f);
+            yield return null;
+        }
+    }
+
+    public IEnumerator HideFiller()
+    {
+        for (int i = 255; i >= 0; i -= 20)
+        {
+            filler.color = new Color(1, 1, 1, i / 255f);
+            yield return null;
+        }
     }
 }
