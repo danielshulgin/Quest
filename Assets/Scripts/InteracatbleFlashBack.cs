@@ -17,8 +17,8 @@ class InteracatbleFlashBack : Interactable
         if (collision.gameObject.tag == "Player")
         {
             //collision.GetComponent<Interaction>().Interact(id);
-            NoteManager.instance.Interact(tagsToRemove, tagsToChange, tagsToCheck, id);
-            if (NoteManager.instance.TagsCorrect(tagsToCheck) && !wait)
+            if (NoteManager.instance.Interact(tagsToRemove, tagsToChange, tagsToCheck, id)
+                && !wait)
             {
                 StartCoroutine(TeleportWithDelay());
             }
