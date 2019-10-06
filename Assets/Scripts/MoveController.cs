@@ -5,9 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MoveController : MonoBehaviour
 {
+    public static MoveController instance;
+
     public float rotationSpeed = 150f;
-    public float maxSpeed = 2.0f;
+    public float defaultMaxSpeed = 2.0f;
+    [HideInInspector] public float maxSpeed = 2.0f;
     private Rigidbody2D rigidbody2D;
+
+    void Awake() {
+        instance = this;
+        maxSpeed = defaultMaxSpeed;
+    }
+
     void Start()
     {
         rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
@@ -31,6 +40,9 @@ public class MoveController : MonoBehaviour
     //float slowRadius = 60f;
     private void UpdateRotation()
     {
+        if (maxSpeed == 0)
+            return;
+
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
             float angle = Mathf.Atan2(Input.GetAxis("Vertical"),
