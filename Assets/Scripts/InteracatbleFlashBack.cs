@@ -37,10 +37,11 @@ class InteracatbleFlashBack : Interactable
 
     IEnumerator TeleportWithDelay()
     {
-        StartCoroutine(UIManager.instance.ShowFiller());
-        MoveController.instance.maxSpeed = 0;
         wait = true;
-        yield return new WaitForSeconds(teleportDelay);
+        MoveController.instance.maxSpeed = 0;
+        yield return new WaitForSeconds(teleportDelay / 2f);
+        StartCoroutine(UIManager.instance.ShowFiller());
+        yield return new WaitForSeconds(teleportDelay / 2f);
         FlashBackManager.instance.Teleport(teleportPoint.transform.position);
         wait = false;
         StartCoroutine(UIManager.instance.HideFiller());
