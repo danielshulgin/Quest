@@ -12,7 +12,7 @@ class NoteManager : MonoBehaviour
 
     public List<string> notes = new List<string>();
 
-    public void Interact(List<string> tagsToRemove,
+    public bool Interact(List<string> tagsToRemove,
                  List<StringBoolPair> tagsToChange,
                  List<StringBoolPair> tagsToCheck, int id)
     {
@@ -23,8 +23,9 @@ class NoteManager : MonoBehaviour
             UIManager.instance.ShowNote(notes[id]);
 			DeleteTags(tagsToRemove);
 			SetTags(tagsToChange);
+            return true;
         }
-
+        return false;
     }
     private void Start()
     {
